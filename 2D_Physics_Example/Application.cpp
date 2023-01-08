@@ -32,9 +32,6 @@ Application::Application()
 	
 	// Player
 	AddModule(player);
-
-	frameDuration = new PerfTimer();
-	ptimer = new PerfTimer();
 }
 
 Application::~Application()
@@ -51,18 +48,6 @@ Application::~Application()
 bool Application::Init()
 {
 	bool ret = true;
-
-	changeFrameRate = 16;
-	maxFrameRate = changeFrameRate;
-
-	startupTime.Start();
-	lastSecFrameTime.Start();
-	frameCount++;
-	lastSecFrameCount++;
-
-	dt = frameDuration->ReadMs();
-	frameDuration->Start();
-
 
 	// Call Init() in all modules
 	p2List_item<Module*>* item = list_modules.getFirst();
@@ -132,33 +117,6 @@ bool Application::CleanUp()
 		item = item->prev;
 	}
 	return ret;
-}
-
-void Application::FinishUpdate()
-{
-	float secondsSinceStartup = startupTime.ReadSec();
-
-	if (lastSecFrameTime.Read() > 1000) {
-		lastSecFrameTime.Start();
-		framesPerSecond = lastSecFrameCount;
-		lastSecFrameCount = 0;
-		averageFps = (averageFps + framesPerSecond) / 2;
-	}
-
-	static char title[256];
-	sprintf_s(title, 256, "Av.FPS: %.2f Last sec frames: %i Last dt: %.3f Time since startup: %.3f Frame Count: %I64u ",
-		averageFps, framesPerSecond, dt, secondsSinceStartup, frameCount);
-
-	float delay = float(maxFrameRate) - frameDuration->ReadMs();
-
-	PerfTimer* delayt = new PerfTimer();
-	delayt->Start();
-	if (maxFrameRate > 0 && delay > 0)
-	{
-		SDL_Delay(delay);
-	}
-
-	maxFrameRate = changeFrameRate;
 }
 
 void Application::ChangeFps()

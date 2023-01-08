@@ -14,8 +14,6 @@
 #include "ModuleSceneIntro.h"
 #include "ModuleFonts.h"
 #include "Defs.h"
-#include "ModuleTimer.h"
-#include "ModulePerfTimer.h"
 
 
 class Application
@@ -43,29 +41,10 @@ public:
 	bool Init();
 	update_status Update();
 	bool CleanUp();
-	void FinishUpdate();
 	void ChangeFps();
 
 private:
 
 	void AddModule(Module* mod);
-
-	PerfTimer* ptimer;
-
-	Timer startupTime;
-	Timer frameTime;
-	Timer lastSecFrameTime;
-
-	uint64 frameCount = 0;
-	uint32 framesPerSecond = 0;
-	uint32 lastSecFrameCount = 0;
-
-	float averageFps = 0.0f;
-	float dt = 0.0f;
-
-	uint32 maxFrameRate;
-
 	uint32 changeFrameRate;
-
-	PerfTimer* frameDuration;;
 };

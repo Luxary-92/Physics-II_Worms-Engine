@@ -59,12 +59,6 @@
     <ClInclude Include="ModuleFonts.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ModulePerfTimer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleTimer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -101,12 +95,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ModuleFonts.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ModulePerfTimer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleTimer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
