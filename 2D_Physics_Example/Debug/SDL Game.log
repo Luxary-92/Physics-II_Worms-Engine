@@ -1,11 +1,11 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: El directorio intermedio (Debug\) contiene archivos compartidos de otro proyecto (Worms.vcxproj). Esto puede dar lugar a un comportamiento incorrecto de limpieza y recompilación.
-  ModulePhysics.cpp
-C:\Users\Luxary\Downloads\Github Projects\Physics-II_Worms-Engine\2D_Physics_Example\ModulePhysics.h(111,11): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
-C:\Users\Luxary\Downloads\Github Projects\Physics-II_Worms-Engine\2D_Physics_Example\ModulePhysics.cpp(41,11): warning C4101: 'r1': variable local sin referencia
-C:\Users\Luxary\Downloads\Github Projects\Physics-II_Worms-Engine\2D_Physics_Example\ModulePhysics.cpp(531,13): warning C4305: '*=': truncamiento de 'double' a 'float'
-C:\Users\Luxary\Downloads\Github Projects\Physics-II_Worms-Engine\2D_Physics_Example\ModulePhysics.cpp(536,7): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\vector(775,1): warning C4530: Se ha utilizado el controlador de excepciones de C++, pero la semántica de desenredo no está habilitada. Especifique /EHsc
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\vector(734): message : Vea la referencia a la creación de una instancia de la función plantilla "PhysObjeto *std::vector<PhysObjeto,std::allocator<PhysObjeto>>::_Emplace_reallocate<PhysObjeto&>(PhysObjeto *const ,PhysObjeto &)" que se está compilando
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\vector(734): message : Vea la referencia a la creación de una instancia de la función plantilla "PhysObjeto *std::vector<PhysObjeto,std::allocator<PhysObjeto>>::_Emplace_reallocate<PhysObjeto&>(PhysObjeto *const ,PhysObjeto &)" que se está compilando
-C:\Users\Luxary\Downloads\Github Projects\Physics-II_Worms-Engine\2D_Physics_Example\ModulePhysics.cpp(116): message : Vea la referencia a la creación de una instancia de la función plantilla "void std::vector<PhysObjeto,std::allocator<PhysObjeto>>::emplace_back<PhysObjeto&>(PhysObjeto &)" que se está compilando
-  SDL Game.vcxproj -> C:\Users\Luxary\Downloads\Github Projects\Physics-II_Worms-Engine\2D_Physics_Example\Debug\PhysEngine.exe
+  Application.cpp
+C:\Users\migue\OneDrive\Documentos\GitHub\Physics-II_Worms-Engine\2D_Physics_Example\ModulePhysics.h(111,11): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+C:\Users\migue\OneDrive\Documentos\GitHub\Physics-II_Worms-Engine\2D_Physics_Example\Application.cpp(63,28): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\migue\OneDrive\Documentos\GitHub\Physics-II_Worms-Engine\2D_Physics_Example\Application.cpp(152,14): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\migue\OneDrive\Documentos\GitHub\Physics-II_Worms-Engine\2D_Physics_Example\Application.cpp(158,13): warning C4244: 'argumento': conversión de 'float' a 'Uint32'; posible pérdida de datos
+  ModuleWindow.cpp
+C:\Users\migue\OneDrive\Documentos\GitHub\Physics-II_Worms-Engine\2D_Physics_Example\ModulePhysics.h(111,11): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+  Generando código...
+  LINK : no se encontró C:\Users\migue\OneDrive\Documentos\GitHub\Physics-II_Worms-Engine\2D_Physics_Example\Debug\PhysEngine.exe o no lo generó el último vínculo incremental; ejecutando vínculo completo
+  SDL Game.vcxproj -> C:\Users\migue\OneDrive\Documentos\GitHub\Physics-II_Worms-Engine\2D_Physics_Example\Debug\PhysEngine.exe
