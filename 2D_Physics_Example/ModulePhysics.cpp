@@ -1,6 +1,7 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModulePhysics.h"
+#include "ModuleFonts.h"
 #include "math.h"
 #include <cmath>
 
@@ -18,6 +19,16 @@ ModulePhysics::~ModulePhysics()
 
 bool ModulePhysics::Start()
 {
+	char lookupTable[] = { "! @,_./0123456789$;< ?abcdefghijklmnopqrstuvwxyz" };
+	char lookUpTable2[] = { "abcdefghijklmnopqrstuvwxyz0123456789!.?   " };
+	char lookupTableChars[] = { " !'#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[/]^_ abcdefghijklmnopqrstuvwxyz{|}~ çüéâäàaçêëèïîìäaéÆæôöòûù" };
+	textFont = App->fonts->Load("Assets/pixel_font.png", lookupTableChars, 8);
+	testFont = App->fonts->Load("Assets/Fonts/rtype_font3.png", lookupTable, 2);
+	font = App->fonts->Load("Assets/Fonts/font.png", lookUpTable2, 7);
+	rFont = App->fonts->Load("Assets/Fonts/rtype_font2.png", lookupTable, 2);
+	bFont = App->fonts->Load("Assets/Fonts/rtype_font.png", lookupTable, 2);
+
+
 	LOG("Creating Physics 2D environment");
 
 	// Create ground
@@ -65,11 +76,14 @@ bool ModulePhysics::Start()
 	// Add ball to the collection
 	balls.emplace_back(ball);
 
+	integrator = 1;
 	return true;
 }
 
 update_status ModulePhysics::PreUpdate()
 {
+	
+
 	// Process all balls in the scenario
 	for (auto& ball : balls)
 	{
@@ -79,6 +93,7 @@ update_status ModulePhysics::PreUpdate()
 			continue;
 		}
 
+		
 		// Step #0: Clear old values
 		// ----------------------------------------------------------------------------------------
 		
@@ -130,7 +145,23 @@ update_status ModulePhysics::PreUpdate()
 		// ----------------------------------------------------------------------------------------
 
 		// We will use the 2nd order "Velocity Verlet" method for integration.
-		integrator_velocity_verlet(ball, dt);
+		
+		switch (integrator)
+		{
+		case 1:
+			integrator_velocity_verlet(ball, dt);
+			App->fonts->BlitText(0, 0, textFont, "|(1, 2, 3) Integrator: Verlet|");
+
+			break;
+		case 2:
+			integrator_backwards_euler(ball, dt);
+			break;
+		case 3:
+			integrator_forward_euler(ball, dt);
+			break;
+		default:
+			break;
+		}
 
 		// Step #4: solve collisions
 		// ----------------------------------------------------------------------------------------
@@ -148,6 +179,23 @@ update_status ModulePhysics::PreUpdate()
 			ball.vx *= ball.coef_friction;
 			ball.vy *= ball.coef_restitution;
 		}
+
+		/*if (App->input->GetKey(SDL_SCANCODE_TAB) == KEY_DOWN)
+		{
+			if (integrator == 1) {
+				integrator_velocity_verlet(ball, dt);
+				App->fonts->BlitText(0, 0, textFont, "|(1, 2, 3) Integrator: Verlet|");
+
+
+			}
+			else if (integrator == 2) {
+				integrator_backwards_euler(ball, dt);
+			}
+			else if (integrator == 3) {
+				integrator_forward_euler(ball, dt);
+				integrator = 1;
+			}
+		}*/
 	}
 
 	// Continue game
@@ -250,6 +298,30 @@ void integrator_velocity_verlet(PhysBall& ball, float dt)
 	ball.vx += ball.ax * dt;
 	ball.vy += ball.ay * dt;
 }
+
+// Integration scheme: Backwards Euler
+void integrator_backwards_euler(PhysBall& ball, float dt)
+{
+	ball.x = ball.x + ball.vx * dt;
+	ball.y = ball.y + ball.vy * dt;
+
+	ball.vx = ball.vx + ball.ax * dt;
+	ball.vy = ball.vy + ball.ay * dt;
+
+}
+
+// Integration scheme: Forward Euler
+void integrator_forward_euler(PhysBall& ball, float dt)
+{
+	ball.vx = ball.vx + ball.ax * dt;
+	ball.vy = ball.vy + ball.ay * dt;
+
+	ball.x = ball.x + ball.vx * dt;
+	ball.y = ball.y + ball.vy * dt;
+
+}
+
+
 
 // Detect collision with ground
 bool is_colliding_with_ground(const PhysBall& ball, const Ground& ground)

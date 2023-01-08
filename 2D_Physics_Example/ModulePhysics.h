@@ -103,6 +103,15 @@ public:
 private:
 
 	bool debug;
+
+	int integrator;
+
+	
+	int textFont = -1;
+	int testFont;
+	int font;
+	int bFont;
+	int rFont;
 };
 
 // Compute modulus of a vector
@@ -119,6 +128,12 @@ void compute_hydrodynamic_buoyancy(float& fx, float& fy, const PhysBall& ball, c
 
 // Integration scheme: Velocity Verlet
 void integrator_velocity_verlet(PhysBall& ball, float dt);
+
+// Integration scheme: Backwards Euler
+void integrator_backwards_euler(PhysBall& ball, float dt);
+
+// Integration scheme: Forward Euler
+void integrator_forward_euler(PhysBall& ball, float dt);
 
 // Detect collision with ground
 bool is_colliding_with_ground(const PhysBall& ball, const Ground& ground);
