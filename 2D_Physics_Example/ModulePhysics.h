@@ -106,7 +106,7 @@ public:
 	Ground ground2{};
 	Ground ground3{};
 	Water water{};
-
+	float speed1=0.1f;
 	// Misc
 	float dt = 1.0 / 60.0;
 

@@ -473,6 +473,15 @@ update_status ModulePhysics::PostUpdate()
 		App->renderer->DrawCircle(pos_x, pos_y, size_r, color_r, color_g, color_b);
 	}
 
+	if ((ground1.y <= 0.0f + ground.h + 5.0f + 10.0f) && (ground1.y >= 0.0f + ground.h + 5.0f)) {
+		ground1.y += speed1;
+	}
+	else if (ground1.y = 0.0f + ground.h + 5.0f + 10.0f) {
+		speed1 = -speed1;
+	}
+	else if (ground1.y = 0.0f + ground.h + 5.0f) {
+		speed1 = -speed1;
+	}
 
 	return UPDATE_CONTINUE;
 }
