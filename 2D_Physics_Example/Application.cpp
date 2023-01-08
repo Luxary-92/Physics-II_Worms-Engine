@@ -125,7 +125,7 @@ void Application::ChangeFps()
 	{
 		changeFrameRate = 32;
 	}
-	else if (changeFrameRate == 32)
+	else if (changeFrameRate >= 32)
 	{
 		changeFrameRate = 16;
 	}
