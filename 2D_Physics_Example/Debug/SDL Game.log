@@ -1,11 +1,32 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: 中间目录(Debug\)包含从另一个项目(Worms.vcxproj)共享的文件。   这会导致错误的清除和重新生成行为。
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: El directorio intermedio (Debug\) contiene archivos compartidos de otro proyecto (Worms.vcxproj). Esto puede dar lugar a un comportamiento incorrecto de limpieza y recompilación.
+  Application.cpp
+C:\Users\Luxary\Downloads\Github Projects\Physics-II_Worms-Engine\2D_Physics_Example\ModulePhysics.h(111,11): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+  Main.cpp
+C:\Users\Luxary\Downloads\Github Projects\Physics-II_Worms-Engine\2D_Physics_Example\ModulePhysics.h(111,11): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+  ModuleAudio.cpp
+C:\Users\Luxary\Downloads\Github Projects\Physics-II_Worms-Engine\2D_Physics_Example\ModulePhysics.h(111,11): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+  ModuleFonts.cpp
+C:\Users\Luxary\Downloads\Github Projects\Physics-II_Worms-Engine\2D_Physics_Example\ModulePhysics.h(111,11): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+  ModuleInput.cpp
+C:\Users\Luxary\Downloads\Github Projects\Physics-II_Worms-Engine\2D_Physics_Example\ModulePhysics.h(111,11): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   ModulePhysics.cpp
-C:\Users\cesar\Desktop\Physics-II_Worms-Engine\2D_Physics_Example\ModulePhysics.h(109,11): warning C4305: “初始化”: 从“double”到“float”截断
-C:\Users\cesar\Desktop\Physics-II_Worms-Engine\2D_Physics_Example\ModulePhysics.cpp(41,11): warning C4101: “r1”: 未引用的局部变量
-C:\Users\cesar\Desktop\Physics-II_Worms-Engine\2D_Physics_Example\ModulePhysics.cpp(451,13): warning C4305: “*=”: 从“double”到“float”截断
-C:\Users\cesar\Desktop\Physics-II_Worms-Engine\2D_Physics_Example\ModulePhysics.cpp(456,7): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\vector(775,1): warning C4530: 使用了 C++ 异常处理程序，但未启用展开语义。请指定 /EHsc
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\vector(734): message : 查看对正在编译的函数 模板 实例化“PhysObjeto *std::vector<PhysObjeto,std::allocator<PhysObjeto>>::_Emplace_reallocate<PhysObjeto&>(PhysObjeto *const ,PhysObjeto &)”的引用
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\vector(734): message : 查看对正在编译的函数 模板 实例化“PhysObjeto *std::vector<PhysObjeto,std::allocator<PhysObjeto>>::_Emplace_reallocate<PhysObjeto&>(PhysObjeto *const ,PhysObjeto &)”的引用
-C:\Users\cesar\Desktop\Physics-II_Worms-Engine\2D_Physics_Example\ModulePhysics.cpp(103): message : 查看对正在编译的函数 模板 实例化“void std::vector<PhysObjeto,std::allocator<PhysObjeto>>::emplace_back<PhysObjeto&>(PhysObjeto &)”的引用
-  SDL Game.vcxproj -> C:\Users\cesar\Desktop\Physics-II_Worms-Engine\2D_Physics_Example\Debug\PhysEngine.exe
+C:\Users\Luxary\Downloads\Github Projects\Physics-II_Worms-Engine\2D_Physics_Example\ModulePhysics.h(111,11): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+C:\Users\Luxary\Downloads\Github Projects\Physics-II_Worms-Engine\2D_Physics_Example\ModulePhysics.cpp(41,11): warning C4101: 'r1': variable local sin referencia
+C:\Users\Luxary\Downloads\Github Projects\Physics-II_Worms-Engine\2D_Physics_Example\ModulePhysics.cpp(536,13): warning C4305: '*=': truncamiento de 'double' a 'float'
+C:\Users\Luxary\Downloads\Github Projects\Physics-II_Worms-Engine\2D_Physics_Example\ModulePhysics.cpp(541,7): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\vector(775,1): warning C4530: Se ha utilizado el controlador de excepciones de C++, pero la semántica de desenredo no está habilitada. Especifique /EHsc
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\vector(734): message : Vea la referencia a la creación de una instancia de la función plantilla "PhysObjeto *std::vector<PhysObjeto,std::allocator<PhysObjeto>>::_Emplace_reallocate<PhysObjeto&>(PhysObjeto *const ,PhysObjeto &)" que se está compilando
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\vector(734): message : Vea la referencia a la creación de una instancia de la función plantilla "PhysObjeto *std::vector<PhysObjeto,std::allocator<PhysObjeto>>::_Emplace_reallocate<PhysObjeto&>(PhysObjeto *const ,PhysObjeto &)" que se está compilando
+C:\Users\Luxary\Downloads\Github Projects\Physics-II_Worms-Engine\2D_Physics_Example\ModulePhysics.cpp(114): message : Vea la referencia a la creación de una instancia de la función plantilla "void std::vector<PhysObjeto,std::allocator<PhysObjeto>>::emplace_back<PhysObjeto&>(PhysObjeto &)" que se está compilando
+  ModulePlayer.cpp
+C:\Users\Luxary\Downloads\Github Projects\Physics-II_Worms-Engine\2D_Physics_Example\ModulePhysics.h(111,11): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+  ModuleRender.cpp
+C:\Users\Luxary\Downloads\Github Projects\Physics-II_Worms-Engine\2D_Physics_Example\ModulePhysics.h(111,11): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+  ModuleSceneIntro.cpp
+C:\Users\Luxary\Downloads\Github Projects\Physics-II_Worms-Engine\2D_Physics_Example\ModulePhysics.h(111,11): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+  ModuleTextures.cpp
+C:\Users\Luxary\Downloads\Github Projects\Physics-II_Worms-Engine\2D_Physics_Example\ModulePhysics.h(111,11): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+  ModuleWindow.cpp
+C:\Users\Luxary\Downloads\Github Projects\Physics-II_Worms-Engine\2D_Physics_Example\ModulePhysics.h(111,11): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+  Generando código...
+  SDL Game.vcxproj -> C:\Users\Luxary\Downloads\Github Projects\Physics-II_Worms-Engine\2D_Physics_Example\Debug\PhysEngine.exe
