@@ -38,6 +38,14 @@ bool ModulePhysics::Start()
 	ground.w = 30.0f; // [m]
 	ground.h = 5.0f; // [m]
 
+	SDL_Rect r1;
+	ground1 = Ground();
+	ground1.x = 25.0f;
+    ground1.y = 0.0f+ground.h+5.0f;
+	ground1.w = 10.0f;
+	ground1.h = 2.0f;
+
+
 	// Create Water
 	water = Water();
 	water.x = ground.x + ground.w; // Start where ground ends [m]
@@ -336,11 +344,18 @@ update_status ModulePhysics::PostUpdate()
 {
 	// Colors
 	int color_r, color_g, color_b;
-
+	App->renderer->DrawQuad(ground1.pixels(), 255, 0, 0);
 	// Draw ground
 	color_r = 0; color_g = 255; color_b = 0;
 	App->renderer->DrawQuad(ground.pixels(), color_r, color_g, color_b);
 
+	SDL_Rect r1;
+	r1.x = 100;
+	r1.y = 100;
+	r1.w = 10;
+	r1.h = 10;
+	
+		
 	// Draw water
 	color_r = 0; color_g = 0; color_b = 255;
 	App->renderer->DrawQuad(water.pixels(), color_r, color_g, color_b);
