@@ -317,6 +317,18 @@ update_status ModulePhysics::PreUpdate()
 			player.vx *= player.coef_friction;
 			player.vy *= player.coef_restitution;
 		}
+		if (is_colliding_with_ground(player, ground1))
+		{
+			// TP player to ground surface
+			player.y = ground1.y + ground1.h + player.radius;
+
+			// Elastic bounce with ground
+			player.vy = -player.vy;
+
+			// FUYM non-elasticity
+			player.vx *= player.coef_friction;
+			player.vy *= player.coef_restitution;
+		}
 
 		/*if (App->input->GetKey(SDL_SCANCODE_TAB) == KEY_DOWN)
 		{
