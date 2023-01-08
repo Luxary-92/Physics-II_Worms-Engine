@@ -3,5 +3,4 @@
 C:\Users\Luxary\Downloads\Github Projects\Physics-II_Worms-Engine\2D_Physics_Example\ModulePhysics.h(111,11): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
 C:\Users\Luxary\Downloads\Github Projects\Physics-II_Worms-Engine\2D_Physics_Example\ModulePlayer.cpp(35,42): warning C4305: '+=': truncamiento de 'double' a 'float'
 C:\Users\Luxary\Downloads\Github Projects\Physics-II_Worms-Engine\2D_Physics_Example\ModulePlayer.cpp(38,42): warning C4305: '-=': truncamiento de 'double' a 'float'
-C:\Users\Luxary\Downloads\Github Projects\Physics-II_Worms-Engine\2D_Physics_Example\ModulePlayer.cpp(50,42): warning C4305: '-=': truncamiento de 'double' a 'float'
   SDL Game.vcxproj -> C:\Users\Luxary\Downloads\Github Projects\Physics-II_Worms-Engine\2D_Physics_Example\Debug\PhysEngine.exe
