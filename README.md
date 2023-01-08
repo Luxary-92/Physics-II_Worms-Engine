@@ -1,4 +1,4 @@
-# Pinball-Pokemon Sapphire
+# Physics-II_Worms-Engine
 
 ## TEAM MEMBERS:
 
@@ -9,7 +9,7 @@
 
 ## CONTROLS:
 
-  * WASD: Move the player
+  * WASD + SPACE : Move the player
   
 ## DEBUG FEATURES:
 
