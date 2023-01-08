@@ -12,7 +12,7 @@
 
 
 // Class: Ball object (a simple stoopid physics object)
-class PhysBall
+class PhysObjeto
 {
 public:
 	// Position
@@ -48,9 +48,15 @@ public:
 	// Shape
 	float radius;
 
+	bool ball = false;
+	bool player = false;
+
 	// Has physics enabled?
 	bool physics_enabled = true;
 };
+
+
+
 
 // Class: Ground
 class Ground : public SDL_Rect
@@ -92,7 +98,8 @@ public:
 	bool CleanUp();
 
 	// Physics objects
-	std::vector<PhysBall> balls{};
+	std::vector<PhysObjeto> player{};
+	std::vector<PhysObjeto> balls{};
 	Atmosphere atmosphere{};
 	Ground ground{};
 	Water water{};
@@ -118,28 +125,28 @@ private:
 float modulus(float vx, float vy);
 
 // Compute Aerodynamic Drag force
-void compute_aerodynamic_drag(float& fx, float& fy, const PhysBall& ball, const Atmosphere& atmosphere);
+void compute_aerodynamic_drag(float& fx, float& fy, const PhysObjeto& Objeto, const Atmosphere& atmosphere);
 
 // Compute Hydrodynamic Drag force
-void compute_hydrodynamic_drag(float& fx, float& fy, const PhysBall& ball, const Water& water);
+void compute_hydrodynamic_drag(float& fx, float& fy, const PhysObjeto& Objeto, const Water& water);
 
 // Compute Hydrodynamic Buoyancy force
-void compute_hydrodynamic_buoyancy(float& fx, float& fy, const PhysBall& ball, const Water& water);
+void compute_hydrodynamic_buoyancy(float& fx, float& fy, const PhysObjeto& Objeto, const Water& water);
 
 // Integration scheme: Velocity Verlet
-void integrator_velocity_verlet(PhysBall& ball, float dt);
+void integrator_velocity_verlet(PhysObjeto& Objeto, float dt);
 
 // Integration scheme: Backwards Euler
-void integrator_backwards_euler(PhysBall& ball, float dt);
+void integrator_backwards_euler(PhysObjeto& Objeto, float dt);
 
 // Integration scheme: Forward Euler
-void integrator_forward_euler(PhysBall& ball, float dt);
+void integrator_forward_euler(PhysObjeto& Objeto, float dt);
 
 // Detect collision with ground
-bool is_colliding_with_ground(const PhysBall& ball, const Ground& ground);
+bool is_colliding_with_ground(const PhysObjeto& Objeto, const Ground& ground);
 
 // Detect collision with water
-bool is_colliding_with_water(const PhysBall& ball, const Water& water);
+bool is_colliding_with_water(const PhysObjeto& Objeto, const Water& water);
 
 // Detect collision between circle and rectange
 bool check_collision_circle_rectangle(float cx, float cy, float cr, float rx, float ry, float rw, float rh);

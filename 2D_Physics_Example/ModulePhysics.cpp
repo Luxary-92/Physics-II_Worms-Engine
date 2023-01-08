@@ -55,7 +55,7 @@ bool ModulePhysics::Start()
 	atmosphere.density = 1.0f; // [kg/m^3]
 
 	// Create a ball
-	PhysBall ball = PhysBall();
+	PhysObjeto ball = PhysObjeto();
 
 	// Set static properties of the ball
 	ball.mass = 10.0f; // [kg]
@@ -73,6 +73,18 @@ bool ModulePhysics::Start()
 	ball.vx = 5.0f;
 	ball.vy = 10.0f;
 
+	// Create a ball
+	PhysObjeto player = PhysObjeto();
+	// Set static properties of the ball
+	player.mass = 30.0f; // [kg]
+	player.surface = 1.0f; // [m^2]
+	player.radius = 1.5f; // [m]
+	player.cd = 0.4f; // [-]
+	player.cl = 1.2f; // [-]
+	player.b = 10.0f; // [...]
+	player.coef_friction = 0.9f; // [-]
+	player.coef_restitution = 0.8f; // [-]
+
 	// Add ball to the collection
 	balls.emplace_back(ball);
 
@@ -82,8 +94,6 @@ bool ModulePhysics::Start()
 
 update_status ModulePhysics::PreUpdate()
 {
-	
-
 	// Process all balls in the scenario
 	for (auto& ball : balls)
 	{
@@ -93,7 +103,6 @@ update_status ModulePhysics::PreUpdate()
 			continue;
 		}
 
-		
 		// Step #0: Clear old values
 		// ----------------------------------------------------------------------------------------
 		
@@ -253,35 +262,35 @@ float modulus(float vx, float vy)
 }
 
 // Compute Aerodynamic Drag force
-void compute_aerodynamic_drag(float &fx, float& fy, const PhysBall &ball, const Atmosphere &atmosphere)
+void compute_aerodynamic_drag(float &fx, float& fy, const PhysObjeto& Objeto, const Atmosphere &atmosphere)
 {
-	float rel_vel[2] = { ball.vx - atmosphere.windx, ball.vy - atmosphere.windy }; // Relative velocity
+	float rel_vel[2] = { Objeto.vx - atmosphere.windx, Objeto.vy - atmosphere.windy }; // Relative velocity
 	float speed = modulus(rel_vel[0], rel_vel[1]); // Modulus of the relative velocity
 	float rel_vel_unitary[2] = { rel_vel[0] / speed, rel_vel[1] / speed }; // Unitary vector of relative velocity
-	float fdrag_modulus = 0.5f * atmosphere.density * speed * speed * ball.surface * ball.cd; // Drag force (modulus)
+	float fdrag_modulus = 0.5f * atmosphere.density * speed * speed * Objeto.surface * Objeto.cd; // Drag force (modulus)
 	fx = -rel_vel_unitary[0] * fdrag_modulus; // Drag is antiparallel to relative velocity
 	fy = -rel_vel_unitary[1] * fdrag_modulus; // Drag is antiparallel to relative velocity
 }
 
 // Compute Hydrodynamic Drag force
-void compute_hydrodynamic_drag(float& fx, float& fy, const PhysBall& ball, const Water& water)
+void compute_hydrodynamic_drag(float& fx, float& fy, const PhysObjeto& Objeto, const Water& water)
 {
-	float rel_vel[2] = { ball.vx - water.vx, ball.vy - water.vy }; // Relative velocity
+	float rel_vel[2] = { Objeto.vx - water.vx, Objeto.vy - water.vy }; // Relative velocity
 	float speed = modulus(rel_vel[0], rel_vel[1]); // Modulus of the relative velocity
 	float rel_vel_unitary[2] = { rel_vel[0] / speed, rel_vel[1] / speed }; // Unitary vector of relative velocity
-	float fdrag_modulus = ball.b * speed; // Drag force (modulus)
+	float fdrag_modulus = Objeto.b * speed; // Drag force (modulus)
 	fx = -rel_vel_unitary[0] * fdrag_modulus; // Drag is antiparallel to relative velocity
 	fy = -rel_vel_unitary[1] * fdrag_modulus; // Drag is antiparallel to relative velocity
 }
 
 // Compute Hydrodynamic Buoyancy force
-void compute_hydrodynamic_buoyancy(float& fx, float& fy, const PhysBall& ball, const Water& water)
+void compute_hydrodynamic_buoyancy(float& fx, float& fy, const PhysObjeto& Objeto, const Water& water)
 {
 	// Compute submerged area (assume ball is a rectangle, for simplicity)
 	float water_top_level = water.y + water.h; // Water top level y
-	float h = 2.0f * ball.radius; // Ball "hitbox" height
-	float surf = h * (water_top_level - ball.y); // Submerged surface
-	if ((ball.y + ball.radius) < water_top_level) surf = h * h; // If ball completely submerged, use just all ball area
+	float h = 2.0f * Objeto.radius; // Ball "hitbox" height
+	float surf = h * (water_top_level - Objeto.y); // Submerged surface
+	if ((Objeto.y + Objeto.radius) < water_top_level) surf = h * h; // If ball completely submerged, use just all ball area
 	surf *= 0.4; // FUYM to adjust values (should compute the area of circle segment correctly instead; I'm too lazy for that)
 
 	// Compute Buoyancy force
@@ -291,52 +300,52 @@ void compute_hydrodynamic_buoyancy(float& fx, float& fy, const PhysBall& ball, c
 }
 
 // Integration scheme: Velocity Verlet
-void integrator_velocity_verlet(PhysBall& ball, float dt)
+void integrator_velocity_verlet(PhysObjeto& Objeto, float dt)
 {
-	ball.x += ball.vx * dt + 0.5f * ball.ax * dt * dt;
-	ball.y += ball.vy * dt + 0.5f * ball.ay * dt * dt;
-	ball.vx += ball.ax * dt;
-	ball.vy += ball.ay * dt;
+	Objeto.x += Objeto.vx * dt + 0.5f * Objeto.ax * dt * dt;
+	Objeto.y += Objeto.vy * dt + 0.5f * Objeto.ay * dt * dt;
+	Objeto.vx += Objeto.ax * dt;
+	Objeto.vy += Objeto.ay * dt;
 }
 
 // Integration scheme: Backwards Euler
-void integrator_backwards_euler(PhysBall& ball, float dt)
+void integrator_backwards_euler(PhysObjeto& Objeto, float dt)
 {
-	ball.x = ball.x + ball.vx * dt;
-	ball.y = ball.y + ball.vy * dt;
+	Objeto.x = Objeto.x + Objeto.vx * dt;
+	Objeto.y = Objeto.y + Objeto.vy * dt;
 
-	ball.vx = ball.vx + ball.ax * dt;
-	ball.vy = ball.vy + ball.ay * dt;
+	Objeto.vx = Objeto.vx + Objeto.ax * dt;
+	Objeto.vy = Objeto.vy + Objeto.ay * dt;
 
 }
 
 // Integration scheme: Forward Euler
-void integrator_forward_euler(PhysBall& ball, float dt)
+void integrator_forward_euler(PhysObjeto& Objeto, float dt)
 {
-	ball.vx = ball.vx + ball.ax * dt;
-	ball.vy = ball.vy + ball.ay * dt;
+	Objeto.vx = Objeto.vx + Objeto.ax * dt;
+	Objeto.vy = Objeto.vy + Objeto.ay * dt;
 
-	ball.x = ball.x + ball.vx * dt;
-	ball.y = ball.y + ball.vy * dt;
+	Objeto.x = Objeto.x + Objeto.vx * dt;
+	Objeto.y = Objeto.y + Objeto.vy * dt;
 
 }
 
 
 
 // Detect collision with ground
-bool is_colliding_with_ground(const PhysBall& ball, const Ground& ground)
+bool is_colliding_with_ground(const PhysObjeto& Objeto, const Ground& ground)
 {
 	float rect_x = (ground.x + ground.w / 2.0f); // Center of rectangle
 	float rect_y = (ground.y + ground.h / 2.0f); // Center of rectangle
-	return check_collision_circle_rectangle(ball.x, ball.y, ball.radius, rect_x, rect_y, ground.w, ground.h);
+	return check_collision_circle_rectangle(Objeto.x, Objeto.y, Objeto.radius, rect_x, rect_y, ground.w, ground.h);
 }
 
 // Detect collision with water
-bool is_colliding_with_water(const PhysBall& ball, const Water& water)
+bool is_colliding_with_water(const PhysObjeto& Objeto, const Water& water)
 {
 	float rect_x = (water.x + water.w / 2.0f); // Center of rectangle
 	float rect_y = (water.y + water.h / 2.0f); // Center of rectangle
-	return check_collision_circle_rectangle(ball.x, ball.y, ball.radius, rect_x, rect_y, water.w, water.h);
+	return check_collision_circle_rectangle(Objeto.x, Objeto.y, Objeto.radius, rect_x, rect_y, water.w, water.h);
 }
 
 // Detect collision between circle and rectange
