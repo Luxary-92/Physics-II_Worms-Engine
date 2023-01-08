@@ -34,7 +34,10 @@ bool ModuleSceneIntro::CleanUp()
 // Update: draw background
 update_status ModuleSceneIntro::Update()
 {
-	
+
+	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
+		App->ChangeFps();
+
 
 	return UPDATE_CONTINUE;
 }

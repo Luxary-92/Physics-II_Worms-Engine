@@ -119,6 +119,20 @@ bool Application::CleanUp()
 	return ret;
 }
 
+void Application::ChangeFps()
+{
+	if (changeFrameRate == 16)
+	{
+		changeFrameRate = 32;
+	}
+	else if (changeFrameRate == 32)
+	{
+		changeFrameRate = 16;
+	}
+	LOG("Changed %d", changeFrameRate);
+}
+
+
 void Application::AddModule(Module* mod)
 {
 	list_modules.add(mod);

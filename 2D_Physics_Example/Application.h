@@ -13,6 +13,7 @@
 #include "ModulePhysics.h"
 #include "ModuleSceneIntro.h"
 #include "ModuleFonts.h"
+#include "Defs.h"
 
 
 class Application
@@ -40,8 +41,10 @@ public:
 	bool Init();
 	update_status Update();
 	bool CleanUp();
+	void ChangeFps();
 
 private:
 
 	void AddModule(Module* mod);
+	uint32 changeFrameRate;
 };
