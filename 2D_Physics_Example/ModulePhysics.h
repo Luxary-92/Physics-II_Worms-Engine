@@ -103,6 +103,7 @@ public:
 	Atmosphere atmosphere{};
 	Ground ground{};
 	Ground ground1{};
+	Ground ground2{};
 	Water water{};
 
 	// Misc
