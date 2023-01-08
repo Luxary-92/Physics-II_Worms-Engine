@@ -73,9 +73,10 @@ bool ModulePhysics::Start()
 	ball.vx = 5.0f;
 	ball.vy = 10.0f;
 
-	// Create a ball
+	// Create a player
 	PhysObjeto player = PhysObjeto();
-	// Set static properties of the ball
+
+	// Set static properties of the player
 	player.mass = 30.0f; // [kg]
 	player.surface = 1.0f; // [m^2]
 	player.radius = 1.5f; // [m]
@@ -84,9 +85,16 @@ bool ModulePhysics::Start()
 	player.b = 10.0f; // [...]
 	player.coef_friction = 0.9f; // [-]
 	player.coef_restitution = 0.8f; // [-]
+	// Set initial position and velocity of the player
+	player.x = 5.0f;
+	player.y = (ground.y + ground.h) + 2.0f;
+	player.vx = 0.0f;
+	player.vy = 0.0f;
 
 	// Add ball to the collection
 	balls.emplace_back(ball);
+
+	players.emplace_back(player);
 
 	integrator = 1;
 	return true;
@@ -207,6 +215,119 @@ update_status ModulePhysics::PreUpdate()
 		}*/
 	}
 
+	//player
+	for (auto& player : players)
+	{
+		// Skip player if physics not enabled
+		if (!player.physics_enabled)
+		{
+			continue;
+		}
+
+		// Step #0: Clear old values
+		// ----------------------------------------------------------------------------------------
+
+		// Reset total acceleration and total accumulated force of the player
+		player.fx = player.fy = 0.0f;
+		player.ax = player.ay = 0.0f;
+
+		// Step #1: Compute forces
+		// ----------------------------------------------------------------------------------------
+
+		// Gravity force
+		float fgx = player.mass * 0.0f;
+		float fgy = player.mass * -10.0f; // Let's assume gravity is constant and downwards
+		player.fx += fgx; player.fy += fgy; // Add this force to player's total force
+
+		// Aerodynamic Drag force (only when not in water)
+		if (!is_colliding_with_water(player, water))
+		{
+			float fdx = 0.0f; float fdy = 0.0f;
+			compute_aerodynamic_drag(fdx, fdy, player, atmosphere);
+			player.fx += fdx; player.fy += fdy; // Add this force to player's total force
+		}
+
+		// Hydrodynamic forces (only when in water)
+		if (is_colliding_with_water(player, water))
+		{
+			// Hydrodynamic Drag force
+			float fhdx = 0.0f; float fhdy = 0.0f;
+			compute_hydrodynamic_drag(fhdx, fhdy, player, water);
+			player.fx += fhdx; player.fy += fhdy; // Add this force to player's total force
+
+			// Hydrodynamic Buoyancy force
+			float fhbx = 0.0f; float fhby = 0.0f;
+			compute_hydrodynamic_buoyancy(fhbx, fhby, player, water);
+			player.fx += fhbx; player.fy += fhby; // Add this force to player's total force
+		}
+
+		// Other forces
+		// ...
+
+		// Step #2: 2nd Newton's Law
+		// ----------------------------------------------------------------------------------------
+
+		// SUM_Forces = mass * accel --> accel = SUM_Forces / mass
+		player.ax = player.fx / player.mass;
+		player.ay = player.fy / player.mass;
+
+		// Step #3: Integrate --> from accel to new velocity & new position
+		// ----------------------------------------------------------------------------------------
+
+		// We will use the 2nd order "Velocity Verlet" method for integration.
+
+		switch (integrator)
+		{
+		case 1:
+			integrator_velocity_verlet(player, dt);
+			App->fonts->BlitText(0, 0, textFont, "|(1, 2, 3) Integrator: Verlet|");
+
+			break;
+		case 2:
+			integrator_backwards_euler(player, dt);
+			break;
+		case 3:
+			integrator_forward_euler(player, dt);
+			break;
+		default:
+			break;
+		}
+
+		// Step #4: solve collisions
+		// ----------------------------------------------------------------------------------------
+
+		// Solve collision between player and ground
+		if (is_colliding_with_ground(player, ground))
+		{
+			// TP player to ground surface
+			player.y = ground.y + ground.h + player.radius;
+
+			// Elastic bounce with ground
+			player.vy = -player.vy;
+
+			// FUYM non-elasticity
+			player.vx *= player.coef_friction;
+			player.vy *= player.coef_restitution;
+		}
+
+		/*if (App->input->GetKey(SDL_SCANCODE_TAB) == KEY_DOWN)
+		{
+			if (integrator == 1) {
+				integrator_velocity_verlet(player, dt);
+				App->fonts->BlitText(0, 0, textFont, "|(1, 2, 3) Integrator: Verlet|");
+
+
+			}
+			else if (integrator == 2) {
+				integrator_backwards_euler(player, dt);
+			}
+			else if (integrator == 3) {
+				integrator_forward_euler(player, dt);
+				integrator = 1;
+			}
+		}*/
+	}
+
 	// Continue game
 	return UPDATE_CONTINUE;
 }
@@ -235,7 +356,7 @@ update_status ModulePhysics::PostUpdate()
 		// Select color
 		if (ball.physics_enabled)
 		{
-			color_r = 255; color_g = 255; color_b = 255;
+			color_r = 255; color_g = 0; color_b = 255;
 		}
 		else
 		{
@@ -245,6 +366,27 @@ update_status ModulePhysics::PostUpdate()
 		// Draw ball
 		App->renderer->DrawCircle(pos_x, pos_y, size_r, color_r, color_g, color_b);
 	}
+	for (auto& player : players)
+	{
+		// Convert from physical magnitudes to geometrical pixels
+		int pos_x = METERS_TO_PIXELS(player.x);
+		int pos_y = SCREEN_HEIGHT - METERS_TO_PIXELS(player.y);
+		int size_r = METERS_TO_PIXELS(player.radius);
+
+		// Select color
+		if (player.physics_enabled)
+		{
+			color_r = 117; color_g = 51; color_b = 163;
+		}
+		else
+		{
+			color_r = 255; color_g = 0; color_b = 0;
+		}
+
+		// Draw ball
+		App->renderer->DrawCircle(pos_x, pos_y, size_r, color_r, color_g, color_b);
+	}
+
 
 	return UPDATE_CONTINUE;
 }
@@ -286,11 +428,11 @@ void compute_hydrodynamic_drag(float& fx, float& fy, const PhysObjeto& Objeto, c
 // Compute Hydrodynamic Buoyancy force
 void compute_hydrodynamic_buoyancy(float& fx, float& fy, const PhysObjeto& Objeto, const Water& water)
 {
-	// Compute submerged area (assume ball is a rectangle, for simplicity)
+	// Compute submerged area (assume object is a rectangle, for simplicity)
 	float water_top_level = water.y + water.h; // Water top level y
-	float h = 2.0f * Objeto.radius; // Ball "hitbox" height
+	float h = 2.0f * Objeto.radius; // object "hitbox" height
 	float surf = h * (water_top_level - Objeto.y); // Submerged surface
-	if ((Objeto.y + Objeto.radius) < water_top_level) surf = h * h; // If ball completely submerged, use just all ball area
+	if ((Objeto.y + Objeto.radius) < water_top_level) surf = h * h; // If object completely submerged, use just all object area
 	surf *= 0.4; // FUYM to adjust values (should compute the area of circle segment correctly instead; I'm too lazy for that)
 
 	// Compute Buoyancy force

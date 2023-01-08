@@ -11,12 +11,12 @@ C:\Users\Luxary\Downloads\Github Projects\Physics-II_Worms-Engine\2D_Physics_Exa
 C:\Users\Luxary\Downloads\Github Projects\Physics-II_Worms-Engine\2D_Physics_Example\ModulePhysics.h(108,11): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   ModulePhysics.cpp
 C:\Users\Luxary\Downloads\Github Projects\Physics-II_Worms-Engine\2D_Physics_Example\ModulePhysics.h(108,11): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
-C:\Users\Luxary\Downloads\Github Projects\Physics-II_Worms-Engine\2D_Physics_Example\ModulePhysics.cpp(294,13): warning C4305: '*=': truncamiento de 'double' a 'float'
-C:\Users\Luxary\Downloads\Github Projects\Physics-II_Worms-Engine\2D_Physics_Example\ModulePhysics.cpp(299,7): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\Luxary\Downloads\Github Projects\Physics-II_Worms-Engine\2D_Physics_Example\ModulePhysics.cpp(436,13): warning C4305: '*=': truncamiento de 'double' a 'float'
+C:\Users\Luxary\Downloads\Github Projects\Physics-II_Worms-Engine\2D_Physics_Example\ModulePhysics.cpp(441,7): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\vector(775,1): warning C4530: Se ha utilizado el controlador de excepciones de C++, pero la semántica de desenredo no está habilitada. Especifique /EHsc
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\vector(734): message : Vea la referencia a la creación de una instancia de la función plantilla "PhysObjeto *std::vector<PhysObjeto,std::allocator<PhysObjeto>>::_Emplace_reallocate<PhysObjeto&>(PhysObjeto *const ,PhysObjeto &)" que se está compilando
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\vector(734): message : Vea la referencia a la creación de una instancia de la función plantilla "PhysObjeto *std::vector<PhysObjeto,std::allocator<PhysObjeto>>::_Emplace_reallocate<PhysObjeto&>(PhysObjeto *const ,PhysObjeto &)" que se está compilando
-C:\Users\Luxary\Downloads\Github Projects\Physics-II_Worms-Engine\2D_Physics_Example\ModulePhysics.cpp(89): message : Vea la referencia a la creación de una instancia de la función plantilla "void std::vector<PhysObjeto,std::allocator<PhysObjeto>>::emplace_back<PhysObjeto&>(PhysObjeto &)" que se está compilando
+C:\Users\Luxary\Downloads\Github Projects\Physics-II_Worms-Engine\2D_Physics_Example\ModulePhysics.cpp(95): message : Vea la referencia a la creación de una instancia de la función plantilla "void std::vector<PhysObjeto,std::allocator<PhysObjeto>>::emplace_back<PhysObjeto&>(PhysObjeto &)" que se está compilando
   ModulePlayer.cpp
 C:\Users\Luxary\Downloads\Github Projects\Physics-II_Worms-Engine\2D_Physics_Example\ModulePhysics.h(108,11): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   ModuleRender.cpp

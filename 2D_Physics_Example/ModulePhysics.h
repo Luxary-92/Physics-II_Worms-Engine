@@ -98,7 +98,7 @@ public:
 	bool CleanUp();
 
 	// Physics objects
-	std::vector<PhysObjeto> player{};
+	std::vector<PhysObjeto> players{};
 	std::vector<PhysObjeto> balls{};
 	Atmosphere atmosphere{};
 	Ground ground{};
