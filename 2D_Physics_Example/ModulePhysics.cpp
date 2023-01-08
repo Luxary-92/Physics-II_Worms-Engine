@@ -110,6 +110,8 @@ bool ModulePhysics::Start()
 	player.vx = 0.0f;
 	player.vy = 0.0f;
 
+
+
 	// Add ball to the collection
 	balls.emplace_back(ball);
 
@@ -401,22 +403,6 @@ update_status ModulePhysics::PreUpdate()
 			player.vy *= player.coef_restitution;
 		}
 
-		/*if (App->input->GetKey(SDL_SCANCODE_TAB) == KEY_DOWN)
-		{
-			if (integrator == 1) {
-				integrator_velocity_verlet(player, dt);
-				App->fonts->BlitText(0, 0, textFont, "|(1, 2, 3) Integrator: Verlet|");
-
-
-			}
-			else if (integrator == 2) {
-				integrator_backwards_euler(player, dt);
-			}
-			else if (integrator == 3) {
-				integrator_forward_euler(player, dt);
-				integrator = 1;
-			}
-		}*/
 	}
 
 	// Continue game

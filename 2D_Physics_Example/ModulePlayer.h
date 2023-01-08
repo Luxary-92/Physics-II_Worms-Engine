@@ -43,4 +43,8 @@ public:
 	PhysBody* flipper_up2_wheel;
 
 	PhysBody* sensor1;
+
+	int tipo_movimiento = 2;
+
+
 };

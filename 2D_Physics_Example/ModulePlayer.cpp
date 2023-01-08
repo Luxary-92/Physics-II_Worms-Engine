@@ -28,27 +28,33 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
+	switch (tipo_movimiento) {
 
-	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
-
+	case 1: //canviando la posicion del player
+		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
+			App->physics->players.data()->x += 0.3;
+		}
+		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
+			App->physics->players.data()->x -= 0.3;
+		}
+		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
+			App->physics->players.data()->y += 3;
+		}
+		break;
+	case 2: //Bloque de instrucciones 2;
+		break;
+		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
+			App->physics->players.data()->vx += 100;
+		}
+		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
+			App->physics->players.data()->x -= 0.3;
+		}
+		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
+			App->physics->players.data()->y += 3;
+		}
+		break;
 	}
-	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
 
-
-	}
-	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
-
-
-	}
-	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
-
-
-	}
-
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
-
-
-	}
 
 	return UPDATE_CONTINUE;
 }
