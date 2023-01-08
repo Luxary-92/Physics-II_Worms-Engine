@@ -1,3 +1,5 @@
+#ifndef __MODULE_FONTS_H__
+#define __MODULE_FONTS_H__
 #include "Module.h"
 #include "SDL\include\SDL_pixels.h"
 
@@ -47,4 +49,6 @@ public:
 private:
 	// An array to keep track and store all loaded fonts
 	Font fonts[MAX_FONTS];
+	
 };
+#endif // __ModuleFonts_H__

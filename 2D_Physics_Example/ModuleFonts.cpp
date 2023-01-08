@@ -4,9 +4,9 @@
 #include "ModuleFonts.h"
 #include<string.h>
 
-ModuleFonts::ModuleFonts(Application* app ,bool isEnabled) : Module(app,isEnabled)
+ModuleFonts::ModuleFonts(Application* app , bool isEnabled) : Module(app,isEnabled)
 {
-
+	
 }
 
 ModuleFonts::~ModuleFonts()
