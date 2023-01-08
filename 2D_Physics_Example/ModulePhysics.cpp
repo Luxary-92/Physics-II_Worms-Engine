@@ -96,8 +96,8 @@ bool ModulePhysics::Start()
 	PhysObjeto player = PhysObjeto();
 
 	// Set static properties of the player
-	player.mass = 30.0f; // [kg]
-	player.surface = 1.0f; // [m^2]
+	player.mass = 50.0f; // [kg]
+	player.surface = 2.25f; // [m^2]
 	player.radius = 1.5f; // [m]
 	player.cd = 0.4f; // [-]
 	player.cl = 1.2f; // [-]
