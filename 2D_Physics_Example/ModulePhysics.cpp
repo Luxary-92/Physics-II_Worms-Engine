@@ -40,7 +40,7 @@ bool ModulePhysics::Start()
 
 	SDL_Rect r1;
 	ground1 = Ground();
-	ground1.x = 25.0f;
+	ground1.x = 20.0f;
     ground1.y = 0.0f+ground.h+5.0f;
 	ground1.w = 10.0f;
 	ground1.h = 2.0f;
@@ -50,6 +50,13 @@ bool ModulePhysics::Start()
 	ground2.y = 0.0f + ground.h + 15.0f;
 	ground2.w = 10.0f;
 	ground2.h = 2.0f;
+
+	ground3 = Ground();
+	ground3.x = 35.0f;
+	ground3.y = 0.0f + ground.h + 15.0f;
+	ground3.w = 10.0f;
+	ground3.h = 2.0f;
+
 	// Create Water
 	water = Water();
 	water.x = ground.x + ground.w; // Start where ground ends [m]
@@ -232,6 +239,18 @@ update_status ModulePhysics::PreUpdate()
 			ball.vx *= ball.coef_friction;
 			ball.vy *= ball.coef_restitution;
 		}
+		if (is_colliding_with_ground(ball, ground3))
+		{
+			// TP ball to ground surface
+			ball.y = ground3.y + ground3.h + ball.radius;
+
+			// Elastic bounce with ground
+			ball.vy = -ball.vy;
+
+			// FUYM non-elasticity
+			ball.vx *= ball.coef_friction;
+			ball.vy *= ball.coef_restitution;
+		}
 
 		/*if (App->input->GetKey(SDL_SCANCODE_TAB) == KEY_DOWN)
 		{
@@ -369,6 +388,18 @@ update_status ModulePhysics::PreUpdate()
 			player.vx *= player.coef_friction;
 			player.vy *= player.coef_restitution;
 		}
+		if (is_colliding_with_ground(player, ground3))
+		{
+			// TP player to ground surface
+			player.y = ground3.y + ground3.h + player.radius;
+
+			// Elastic bounce with ground
+			player.vy = -player.vy;
+
+			// FUYM non-elasticity
+			player.vx *= player.coef_friction;
+			player.vy *= player.coef_restitution;
+		}
 
 		/*if (App->input->GetKey(SDL_SCANCODE_TAB) == KEY_DOWN)
 		{
@@ -398,6 +429,7 @@ update_status ModulePhysics::PostUpdate()
 	int color_r, color_g, color_b;
 	App->renderer->DrawQuad(ground1.pixels(), 255, 0, 0);
 	App->renderer->DrawQuad(ground2.pixels(), 255, 0, 0);
+	App->renderer->DrawQuad(ground3.pixels(), 255, 0, 0);
 	// Draw ground
 	color_r = 0; color_g = 255; color_b = 0;
 	App->renderer->DrawQuad(ground.pixels(), color_r, color_g, color_b);

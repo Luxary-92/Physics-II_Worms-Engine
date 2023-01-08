@@ -104,6 +104,7 @@ public:
 	Ground ground{};
 	Ground ground1{};
 	Ground ground2{};
+	Ground ground3{};
 	Water water{};
 
 	// Misc
