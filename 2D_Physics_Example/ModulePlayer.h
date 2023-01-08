@@ -44,7 +44,7 @@ public:
 
 	PhysBody* sensor1;
 
-	int tipo_movimiento = 2;
+	int tipo_movimiento = 1;
 
 
 };

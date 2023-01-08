@@ -103,7 +103,7 @@ bool ModulePhysics::Start()
 	player.cl = 1.2f; // [-]
 	player.b = 10.0f; // [...]
 	player.coef_friction = 0.9f; // [-]
-	player.coef_restitution = 0.8f; // [-]
+	player.coef_restitution = 0.2f; // [-]
 	// Set initial position and velocity of the player
 	player.x = 5.0f;
 	player.y = (ground.y + ground.h) + 2.0f;

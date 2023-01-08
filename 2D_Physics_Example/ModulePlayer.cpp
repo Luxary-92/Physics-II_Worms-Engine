@@ -44,6 +44,18 @@ update_status ModulePlayer::Update()
 	case 2: //Bloque de instrucciones 2;
 		break;
 		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
+			App->physics->players.data()->ax += 100;
+		}
+		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
+			App->physics->players.data()->ax += 100;
+		}
+		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
+			App->physics->players.data()->ay += 3;
+		}
+		break;
+	case 3: //Bloque de instrucciones 2;
+		break;
+		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
 			App->physics->players.data()->fx += 100;
 		}
 		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
@@ -55,13 +67,15 @@ update_status ModulePlayer::Update()
 		break;
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_F9) == KEY_REPEAT) {
+	if (App->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN) {
 		if (tipo_movimiento == 1 ) {
 			tipo_movimiento = 2;
 		}
 		if (tipo_movimiento == 2) {
+			tipo_movimiento = 3;
+		}
+		else {
 			tipo_movimiento = 1;
-
 		}
 	}
 
